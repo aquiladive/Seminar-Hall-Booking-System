@@ -143,6 +143,25 @@
   border: 1px solid #ccc;
   border-top: none;
 }
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.btn {
+  outline: none;
+  color: black;
+  background-color: transparent;
+  box-shadow: 0 0 0 0;
+}
+
+.clearfix {
+  margin: 15px;
+}
   </style>
 </head>
 <body>
@@ -178,6 +197,10 @@
     </div>
     <br>
     <div id="tab1" class="tab-content">
+      <div class="clearfix">
+        <a class="btn btn-info left" href="/event_cal2?{{ prev_month }}"> Previous Month </a>
+        <a class="btn btn-info right" href="/event_cal2?{{ next_month }}"> Next Month </a>
+      </div>
         {{ calendar_t }}
     </div>
 
