@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=100)),
                 ('date', models.DateField()),
-                ('time', models.CharField(choices=[('9AM-1PM', '9 AM - 1 PM'), ('1PM-5PM', '1 PM - 5 PM')], default=('9AM-1PM', '9 AM - 1 PM'), max_length=10)),
+                ('time', models.CharField(choices=[('9AM-1PM', '9 AM - 1 PM'), ('1PM-5PM', '1 PM - 5 PM'),  ('9AM-5PM', '9 AM - 5 PM')], default=('9AM-1PM', '9 AM - 1 PM'), max_length=10)),
                 ('description', models.CharField(max_length=300)),
                 ('hall', models.CharField(choices=[('Ramegowda', 'Ramegowda Seminar Hall'), ('Training', 'Training Hall')], default=('Ramegowda', 'Ramegowda Seminar Hall'), max_length=10)),
                 ('dept', models.CharField(max_length=10)),
