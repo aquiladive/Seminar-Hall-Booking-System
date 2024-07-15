@@ -12,10 +12,10 @@ class Calendar(HTMLCalendar):
 	# formats a day as a td
 	# filter events by day
 	def formatday(self, day, events):
-		events_per_day = events.filter(date__day=day, hall=self.location)
+		events_per_day = events.filter(date__day=day, hall=self.location, approval="True")
 		d = ''
 		for event in events_per_day:
-			d += f'<li><a data-bs-toggle="modal" data-bs-target="#desc{event.id}-modal">{event.name} ({event.time})</a></li>'
+			d += f'<li><a data-bs-toggle="modal" data-bs-target="#desc{event.id}-modal">{event.dept}: {event.name} ({event.time})</a></li>'
 			d += f'<div class="modal" id="desc{event.id}-modal" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Event Description</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body">{event.description}</div></div></div></div>'
 
 		if day != 0:
@@ -44,7 +44,7 @@ class Calendar(HTMLCalendar):
 	
 
 def eventVerify(newEvent):
-	today = datetime.date.today()
+	today = datetime.date(datetime.today())
 	eventDate = newEvent.date
 
 	#if event is being booked for a past date

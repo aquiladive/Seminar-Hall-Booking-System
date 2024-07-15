@@ -55,9 +55,37 @@
         </table>
     </div>
 
+    <div class="row">
+    <form style="width: 250px; margin-left: 400px;" action="" method="get">
+    {% csrf_token %}
+    <h2>Approve Event: </h2>
+    <select name="tba" id="tba">
+    <option value="">Select an event</option>
+    {% for e in event %}
+    <option value="{{e.id}}">{{e.id}} - {{e.name}}</option>
+    {% endfor %}
+    </select>
+    <br>
+    <button type="submit" class="btn btn-outline-primary my-2 my-sm-0 bg-success text-white">Approve</button>
+    </form>
+
+    <form style="width: 250px; margin-left: 100px;" action="" method="get">
+        {% csrf_token %}
+        <h2>Reject Event: </h2>
+        <select name="tbr" id="tbr">
+        <option value="">Select an event</option>
+        {% for e in event %}
+        <option value="{{e.id}}">{{e.id}} - {{e.name}}</option>
+        {% endfor %}
+        </select>
+        <br>
+        <button type="submit" class="btn btn-outline-primary my-2 my-sm-0 bg-danger text-white">Reject</button>
+    </form>
+    </div>
+    <!--
     <div class="row" style="align-items: center;display: flex; justify-content: center;">
         <div class="col-md-3" > 
-            <button id="addbtn" type="button" class="mb-5 btn btn-success btn-lg" onclick="toggle();">
+            <button id="addbtn" type="button" class="mb-5 btn btn-success btn-lg" onclick="toggle()">
                 Approve Event
             </button>
         </div>
@@ -83,6 +111,6 @@
             else
                 hidenseek.style.display = "none";*/
         }
-    </script>
+    </script>-->
 </body>
 </html>

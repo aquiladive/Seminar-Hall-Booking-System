@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '' #secret key has been removed, add your own
+SECRET_KEY = 'asasasa' #secret key has been removed, add your own
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -79,9 +79,9 @@ WSGI_APPLICATION = 'sbhs.wsgi.application'
 DATABASES = {
     'default': {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "", #create your own db in MySQL and place the name here 
-        "USER": "", #insert your username
-        "PASSWORD": "", #insert your password
+        "NAME": "seminar_hall_db", #create your own db in MySQL and place the name here 
+        "USER": "RecordKeeper", #insert your username
+        "PASSWORD": "Vertin", #insert your password
         "HOST": "",
         "PORT": "3306",
     }
@@ -122,7 +122,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'C:/VSCDjango/project/sbhs/sbhs_app/static/' #static URL has been kept to show how the path should be, but replace it with the path on your own system
+STATIC_URL = 'C:/Users/sharm/Desktop/BIT/mini project/final/Seminar-Hall-Booking-System/sbhs_app/static/' #static URL has been kept to show how the path should be, but replace it with the path on your own system
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

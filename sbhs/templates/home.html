@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -101,7 +102,7 @@
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="mainpage.html">
-                <img src="logo.png" width="200" height="50" alt="">
+                <img src="{% static 'logo.JPG' %}" width="400" height="75" alt="">
             </a>
     
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -133,7 +134,8 @@
         </div>
     </nav>
 
-    <br><br><br><br><br>
+    <br><br><br><br>
+    <img src="{% static 'campus.JPG' %}" width="100%" height="100%" alt="">
     <p>The Seminar Hall Booking System provides an easy and hassle-free way to book the BIT halls for events.</p>
 
 
@@ -143,8 +145,8 @@
     <div class="col-md-2">
         <ul>
             <li style="margin-bottom: 10px"><b>About</b></li>
-            <li><a class="foot" href="about.html">About Us</a></li>
-            <li><a class="foot" href="contact.html">Contact Us</a></li>
+            <li><a class="foot" href="/about">About Us</a></li>
+            <li><a class="foot" href="/contact">Contact Us</a></li>
         </ul>
     </div>
 
