@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from datetime import datetime
+import datetime
+from datetime import timedelta
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import generic
 from django.utils.safestring import mark_safe
+import calendar
 
 from sbhs_app.models import user, adminUser, event
 from sbhs.forms import userForm, eventForm
@@ -136,10 +138,11 @@ class CalendarViewR(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        d = get_date(self.request.GET.get('day', None))
+        d = get_date(self.request.GET.get('month', None))
         cal_ramegowda = Calendar(d.year, d.month, "Ramegowda")
         html_calr = cal_ramegowda.formatmonth(withyear=True)
-        return {'calendar_r':mark_safe(html_calr)}
+        context.update({'calendar_r':mark_safe(html_calr), 'prev_month':prev_month(d), 'next_month':next_month(d)})
+        return context
 
 class CalendarViewT(generic.ListView):
     model = event
@@ -147,13 +150,27 @@ class CalendarViewT(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        d = get_date(self.request.GET.get('day', None))
+        d = get_date(self.request.GET.get('month', None))
         cal_training = Calendar(d.year, d.month, "Training")
         html_calt = cal_training.formatmonth(withyear=True)
-        return {'calendar_t':mark_safe(html_calt)}
+        context.update({'calendar_t':mark_safe(html_calt), 'prev_month':prev_month(d), 'next_month':next_month(d)})
+        return context
 
 def get_date(req_day):
     if req_day:
         year, month = (int(x) for x in req_day.split('-'))
         return datetime.date(year, month, day=1)
-    return datetime.today()
+    return datetime.date.today()
+
+def prev_month(d):
+    first = d.replace(day=1)
+    prev_month = first - timedelta(days=1)
+    month = 'month=' + str(prev_month.year) + '-' + str(prev_month.month)
+    return month
+
+def next_month(d):
+    days_in_month = calendar.monthrange(d.year, d.month)[1]
+    last = d.replace(day=days_in_month)
+    next_month = last + timedelta(days=1)
+    month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
+    return month
