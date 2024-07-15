@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
 
@@ -142,13 +143,32 @@
   border: 1px solid #ccc;
   border-top: none;
 }
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.btn {
+  outline: none;
+  color: black;
+  background-color: transparent;
+  box-shadow: 0 0 0 0;
+}
+
+.clearfix {
+  margin: 15px;
+}
   </style>
 </head>
 <body>
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="mainpage.html">
-                <img src="logo.png" width="200" height="50" alt="">
+              <img src="{% static 'logo.JPG' %}" width="400" height="75" alt="">
             </a>
     
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -177,6 +197,10 @@
     </div>
     <br>
     <div id="tab1" class="tab-content">
+      <div class="clearfix">
+        <a class="btn btn-info left" href="/event_cal1?{{ prev_month }}"> Previous Month </a>
+        <a class="btn btn-info right" href="/event_cal1?{{ next_month }}"> Next Month </a>
+      </div>
         {{ calendar_r }}
     </div>
 
