@@ -91,9 +91,31 @@ def admin(request):
     else:
         return HttpResponse("<h3>Page cannot be accessed.</h3>")
 
+#event approval by admin
 def adminApprove(request):
+    global adminuser
     eventlist = event.objects.filter(approval="False")
-    return render(request, 'adminapprove.html', {'event':eventlist})
+    if adminuser!="":
+        if 'tba' in request.GET and request.GET['tba']=='':
+            return render(request, 'adminapprove.html', {'event':eventlist})
+        if 'tbr' in request.GET and request.GET['tbr']=='':
+            return render(request, 'adminapprove.html', {'event':eventlist})
+        if 'tba' in request.GET and request.GET['tba']:
+            tbaEventId = request.GET['tba']
+            tbaEvent = event.objects.get(id=tbaEventId)
+            tbaEvent.approval = "True"
+            tbaEvent.save()
+            eventlist = event.objects.filter(approval="False")
+            return render(request, 'adminapprove.html', {'event':eventlist})
+        elif 'tbr' in request.GET and request.GET['tbr']:
+            tbaEventId = request.GET['tbr']
+            event.objects.filter(id=tbaEventId).delete()
+            eventlist = event.objects.filter(approval="False")
+            return render(request, 'adminapprove.html', {'event':eventlist})
+        else:
+            return render(request, 'adminapprove.html', {'event':eventlist})
+    else:
+        return HttpResponse("<h3>Page cannot be accessed.</h3>")
 
 
 def bookEvent(request):
