@@ -10,7 +10,11 @@ class eventForm(forms.Form):
         required=True,
         widget=forms.TextInput()
     )
-    event_date = forms.DateField(
+    event_start_date = forms.DateField(
+        required=True,
+        widget=forms.SelectDateWidget()
+    )
+    event_end_date = forms.DateField(
         required=True,
         widget=forms.SelectDateWidget()
     )

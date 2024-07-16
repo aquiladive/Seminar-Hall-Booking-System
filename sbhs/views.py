@@ -53,6 +53,7 @@ def deptlogin(request):
 
     return render(request, 'deptlogin.html', {'form': form, 'error':error})
 
+
 def dept(request):
     global deptuser
     if deptuser!="":
@@ -128,11 +129,12 @@ def bookEvent(request):
             form = eventForm(request.POST)
             if form.is_valid():
                 name = form.cleaned_data['event_name']
-                date = form.cleaned_data['event_date']
+                start_date = form.cleaned_data['event_start_date']
+                end_date = form.cleaned_data['event_end_date']
                 time = form.cleaned_data['timeSlot']
                 desc = form.cleaned_data['event_description']
                 hall = form.cleaned_data['event_hall']
-                newEvent = event(name=name, date=date, time=time, description=desc, hall=hall, dept=deptuser, approval="False")
+                newEvent = event(name=name, startdate=start_date, time=time, description=desc, hall=hall, dept=deptuser, approval="False", enddate=end_date)
                 verify = eventVerify(newEvent)
                 if verify==0:
                     newEvent.save()
