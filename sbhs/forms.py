@@ -19,7 +19,8 @@ class eventForm(forms.Form):
         choices=[
             ('', 'Select a time slot'),
             ('9AM-1PM', '9 AM - 1 PM'),
-            ('1PM-5PM', '1 PM - 5 PM')
+            ('1PM-5PM', '1 PM - 5 PM'),
+            ('9AM-5PM', 'Full Day')
         ],
         widget=forms.Select()
     )
