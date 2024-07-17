@@ -121,7 +121,7 @@ def adminApprove(request):
 
 def bookEvent(request):
     global deptuser
-    errorList = [False, "Event date must be set in the future.", "The day's slots have already been booked, please choose another date.", "No events can be booked on a Sunday."]
+    errorList = [False, "Event date must be set in the future.", "Invalid end date", "The day's slots have already been booked, please choose another date."]
     errorMsg = ""
     if deptuser!="":
         error = errorList[0]
