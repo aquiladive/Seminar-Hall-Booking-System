@@ -58,12 +58,13 @@ class event(models.Model):
     )
 
     name = models.CharField(max_length=100)
-    date = models.DateField()
+    startdate = models.DateField()
     time = models.CharField(max_length=10, choices=time_choices, default=time_choices[0])
     description = models.CharField(max_length=300)
     hall = models.CharField(max_length=10, choices=hall_choices, default=hall_choices[0])
     dept = models.CharField(max_length=10)
     approval = models.CharField(max_length=5, choices=approve_choices, default=approve_choices[0])
+    enddate = models.DateField()
 
     def __unicode__(self):
         return self.name
