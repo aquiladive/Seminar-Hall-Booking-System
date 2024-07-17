@@ -1,5 +1,6 @@
 Newest changes:
 ---------------
+x Implemented SMS to HODs whenever their event is approved or rejected.
 x Changed "date" field of event to "start date" and added an "end date" field as well.
 x Linked "Blog" to the official BIT site.
 x Added CSE department details to department home page.
@@ -13,5 +14,4 @@ x Implement user logout.
 x Change "blog" to something within the site (feed of events at BIT?).
 x Change department home page details to be according to the HOD who logged in.
 x Work on the HTML (particularly make it responsive and remove hardcoded sizes, but also make the department and admin home pages look better).
-x Implement SMS from site to HOD when their booking request is approved or rejected (as a short-term goal, incorporate email).
 x Change user login recording from global variable to sessions and cookies.
