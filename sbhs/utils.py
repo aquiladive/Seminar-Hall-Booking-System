@@ -74,6 +74,8 @@ def eventVerify(newEvent):
 	eventStartDate = newEvent.startdate
 	eventEndDate = newEvent.enddate
 
+	# errorList = [False, "Event dates must be set in the future.", "The day's slots have already been booked, please choose another date.", "No events can be booked on a Sunday."]
+
 	#if event is being booked for a past date
 	if today > eventStartDate or today > eventEndDate:
 		return 1
@@ -98,7 +100,13 @@ def eventVerify(newEvent):
 	for e in eventList:
 		if e.time == newEvent.time or e.time == "9AM-5PM":
 			return 2
+	
+	eventrange = event.objects.filter(startdate__lte=eventStartDate)
+	for e in eventrange:
+		if e.enddate > eventStartDate and e.time == newEvent.time:
+			return 2
 		
+
 	#if event is being booked on Sunday
 	#if eventDate.strftime("%A")=='Sunday':
 	#	return 3
