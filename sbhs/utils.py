@@ -7,6 +7,7 @@ diff = 0
 global cont
 cont = False
 global longEvent
+global d
 
 class Calendar(HTMLCalendar):
 	def __init__(self, year=None, month=None, location=None):
@@ -19,13 +20,16 @@ class Calendar(HTMLCalendar):
 	# filter events by day
 	def formatday(self, day, events):
 		events_per_day = events.filter(startdate__day=day, hall=self.location, approval="True")
+		global d
 		d = ''
 
 		global cont
 		global diff
 		global longEvent
 		if cont and diff >= 0:
-			d += f'<li><a data-bs-toggle="modal" data-bs-target="#desc{longEvent.id}-modal">{longEvent.dept}: {longEvent.name} ({longEvent.time})</a></li>'			
+			d += f'<li><a data-bs-toggle="modal" data-bs-target="#desc{longEvent.id}-modal">{longEvent.dept}: {longEvent.name} ({longEvent.time})</a></li>'	
+			d += f'<div class="modal" id="desc{longEvent.id}-modal" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Event Description</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body">{longEvent.description}</div></div></div></div>'
+				
 			diff -= 1
 			if diff == 0:
 				cont = False
@@ -46,6 +50,7 @@ class Calendar(HTMLCalendar):
 
 		if day != 0:
 			return f"<td><span class='date'>{day}</span><ul> {d} </ul></td>"
+			
 		return '<td style="background-color:grey;"></td>'
 
 	# formats a week as a tr 
@@ -78,27 +83,27 @@ def eventVerify(newEvent):
 	if today > eventStartDate or today > eventEndDate:
 		return 1
 	
+	if eventStartDate > eventEndDate:
+		return 2
+
 	#if event is being booked when other events have already been booked
 	eventList = event.objects.filter(startdate=eventStartDate)
 	for e in eventList:
 		if e.time == newEvent.time:
-			return 2
+			return 3
 	
-	eventList = event.objects.filter(enddate=eventStartDate)
-	for e in eventList:
-		if e.time == newEvent.time:
-			return 2
-
 	eventList = event.objects.filter(enddate=eventEndDate)
 	for e in eventList:
 		if e.time == newEvent.time or e.time == "9AM-5PM":
-			return 2
+			return 3
+	
+	eventrange = event.objects.filter(startdate__lte=eventStartDate)
+	for e in eventrange:
+		if e.enddate > eventStartDate:
+			if e.time == newEvent.time or e.time == "9AM-5PM":
+				return 3
+	
 
-	eventList = event.objects.filter(enddate=eventStartDate)
-	for e in eventList:
-		if e.time == newEvent.time or e.time == "9AM-5PM":
-			return 2
-		
 	#if event is being booked on Sunday
 	#if eventDate.strftime("%A")=='Sunday':
 	#	return 3
