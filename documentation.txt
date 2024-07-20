@@ -8,10 +8,7 @@ x Added CSE department details to department home page.
 
 Things to do:
 -------------
-x Fix the issues caused by implementing start date and end date to events. 
-x Clear up eventVerify().
-x Implement user logout.
 x Change "blog" to something within the site (feed of events at BIT?).
 x Change department home page details to be according to the HOD who logged in.
 x Work on the HTML (particularly make it responsive and remove hardcoded sizes, but also make the department and admin home pages look better).
-x Change user login recording from global variable to sessions and cookies.
+x Change user login/logout recording from global variable to sessions and cookies.
